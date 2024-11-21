@@ -61,9 +61,10 @@ def get_playlist_by_mood(mood):
         playlist_name = playlist['name']
         playlist_url = playlist['external_urls']['spotify']
         playlist_image = playlist['images'][0]['url'] if playlist['images'] else None
-        return playlist_name, playlist_url, playlist_image
+        playlist_uri = playlist['uri']  # Додано URI
+        return playlist_name, playlist_url, playlist_image, playlist_uri
     else:
-        return None, None, None
+        return None, None, None, None
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -82,13 +83,14 @@ def predict():
             predicted_class = torch.argmax(outputs, dim=1).item()
 
         predicted_emotion = emotion_dict[predicted_class]
-        playlist_name, playlist_url, playlist_image = get_playlist_by_mood(predicted_emotion)
+        playlist_name, playlist_url, playlist_image, playlist_uri = get_playlist_by_mood(predicted_emotion)
 
         response = {
             'emotion': predicted_emotion,
             'playlist_name': playlist_name,
             'playlist_url': playlist_url,
-            'playlist_image': playlist_image  # Додано поле зображення
+            'playlist_image': playlist_image,
+            'playlist_uri': playlist_uri  # Додано поле URI
         }
 
         return jsonify(response)
