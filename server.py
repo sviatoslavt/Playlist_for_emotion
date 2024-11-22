@@ -5,6 +5,7 @@ from transformers import AutoTokenizer, AutoModel
 import torch.nn as nn
 import torch.nn.functional as F
 import spotipy
+import random
 from spotipy.oauth2 import SpotifyClientCredentials
 
 app = Flask(__name__)
@@ -55,13 +56,13 @@ emotion_dict = {
 }
 
 def get_playlist_by_mood(mood):
-    results = sp.search(q=f"mood:{mood} playlist", type='playlist')
+    results = sp.search(q=f"mood:{mood} playlist", type='playlist', limit=5, market='US')  # Отримуємо до 5 плейлистів
     if results['playlists']['items']:
-        playlist = results['playlists']['items'][0]
+        playlist = random.choice(results['playlists']['items'])  # Вибираємо випадковий плейлист
         playlist_name = playlist['name']
         playlist_url = playlist['external_urls']['spotify']
         playlist_image = playlist['images'][0]['url'] if playlist['images'] else None
-        playlist_uri = playlist['uri']  # Додано URI
+        playlist_uri = playlist['uri']
         return playlist_name, playlist_url, playlist_image, playlist_uri
     else:
         return None, None, None, None
