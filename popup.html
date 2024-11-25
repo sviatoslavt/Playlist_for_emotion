@@ -8,17 +8,21 @@
 <body>
   <div class="container">
     <h1>Emotion Playlist</h1>
-    <label class="toggle-label">
-      Enable Emotion Analysis
-      <input type="checkbox" id="toggleButton" class="toggle-input">
-      <span class="toggle-slider"></span>
-    </label>
+    <div class="toggle-container">
+      <label for="toggleButton">Enable Emotion Analysis</label>
+      <label class="switch">
+        <input type="checkbox" id="toggleButton" class="toggle-input">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <button id="loginButton">Login with Google</button>
+    <button id="logoutButton" style="display: none;">Logout</button>
+    <div id="userInfo" class="user-info"></div>
     <div id="result" class="result-container">
       <p>No text selected or unable to analyze emotion.</p>
     </div>
-    <h2>History</h2>
     <div id="history" class="history-container">
-      <p>Loading history...</p>
+      <p>You need to log in to view the history.</p>
     </div>
   </div>
   <script src="popup.js"></script>

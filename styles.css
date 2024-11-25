@@ -1,7 +1,8 @@
+/* Загальні стилі */
 body {
   font-family: Arial, sans-serif;
   background-color: #000; /* Чорний фон */
-  color: #E1E8ED; 
+  color: #E1E8ED;
   margin: 0;
   padding: 0;
 }
@@ -11,60 +12,189 @@ body {
   padding: 20px;
   background-color: #15202B; 
   margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 h1 {
   font-size: 26px;
   font-weight: bold;
   text-align: center;
-  color: #1DA1F2; 
+  color: #1DA1F2;
   margin-bottom: 20px;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-.toggle-label {
+/* Слайдер-перемикач */
+.toggle-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
   color: #E1E8ED;
 }
 
-.toggle-input {
-  display: none;
-}
-
-.toggle-slider {
+.switch {
+  position: relative;
+  display: inline-block;
   width: 50px;
   height: 25px;
-  background-color: #657786; 
-  border-radius: 15px;
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-.toggle-input:checked + .toggle-slider {
-  background-color: #1DA1F2; 
-  box-shadow: 0 0 8px #1DA1F2; /* неоновий ефект при ввімкненні */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.toggle-slider:before {
-  content: '';
+.slider {
   position: absolute;
-  width: 23px;
-  height: 23px;
-  border-radius: 50%;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #657786; /* Сірий фон */
+  transition: 0.4s;
+  border-radius: 25px; /* Круглі краї */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
   background-color: white;
-  top: 1px;
-  left: 1px;
-  transition: transform 0.2s;
+  transition: 0.4s;
+  border-radius: 50%; /* Круглий перемикач */
 }
 
-.toggle-input:checked + .toggle-slider:before {
-  transform: translateX(25px);
+input:checked + .slider {
+  background-color: #1DA1F2; /* Синій фон при ввімкненні */
+  box-shadow: 0 0 8px #1DA1F2; /* Ефект підсвічування */
 }
 
+input:checked + .slider:before {
+  transform: translateX(25px); /* Переміщення перемикача */
+}
+
+/* Кнопки */
+button {
+  background-color: #1DA1F2;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #0D8AE8;
+  transform: translateY(-2px);
+}
+
+button:active {
+  background-color: #166D9B;
+  transform: translateY(0);
+}
+
+/* Кнопки авторизації */
+#loginButton {
+  display: block;
+  background-color: #EA4335;
+  color: #FFF;
+}
+
+#loginButton:hover {
+  background-color: #C53B2E;
+}
+
+#logoutButton {
+  display: none;
+  background-color: #657786;
+  color: #FFF;
+}
+
+#logoutButton:hover {
+  background-color: #4E5C68;
+}
+
+/* Стилі інформації про користувача */
+.user-info {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #1B2733;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.user-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #E1E8ED;
+}
+
+.user-info strong {
+  color: #1DA1F2;
+}
+
+/* Історія */
+.history-container {
+  max-height: 200px; /* Максимальна висота блоку історії */
+  overflow-y: auto; /* Вертикальна прокрутка */
+  background-color: #1B2733;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 15px; /* Відступ зверху для розмежування з іншими елементами */
+}
+
+.history-item {
+  margin-bottom: 10px; /* Відступ між елементами історії */
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #16222E; /* Темніший фон для кожного запису */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.history-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #E1E8ED;
+}
+
+.history-item a {
+  color: #1DA1F2;
+  text-decoration: none;
+}
+
+.history-item a:hover {
+  text-decoration: underline;
+}
+
+/* Прокрутка історії */
+.history-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-container::-webkit-scrollbar-thumb {
+  background-color: #1DA1F2;
+  border-radius: 4px;
+}
+
+.history-container::-webkit-scrollbar-track {
+  background-color: #1B2733;
+}
+
+/* Результати */
 .result-container {
   text-align: center;
   color: #E1E8ED;
@@ -80,63 +210,8 @@ h1 {
   margin: 10px 0;
 }
 
-.result-container a {
-  color: #1DA1F2; 
-  text-decoration: none;
-}
-
-.result-container a:hover {
-  text-decoration: underline;
-}
-
-.playlist-image {
-  width: 80%;
+.result-container img {
   margin-top: 10px;
+  border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-}
-
-
-.history-container {
-  max-height: 300px; /* Максимальна висота контейнера */
-  overflow-y: auto; /* Додає прокрутку, якщо елемент перевищує висоту */
-  background-color: #1B2733; /* Темний фон, щоб відповідати стилю результату */
-  padding: 10px; /* Внутрішній відступ */
-  border-radius: 10px; /* Закруглені кути */
-  margin-top: 20px; /* Відступ від інших елементів */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Тінь */
-  color: #E1E8ED; /* Колір тексту */
-}
-
-.history-item {
-  background-color: #15202B; /* Темний фон для кожного запису */
-  padding: 10px; /* Внутрішній відступ */
-  margin-bottom: 10px; /* Відступ між записами */
-  border-radius: 8px; /* Закруглені кути */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Тінь для записів */
-}
-
-.history-item p {
-  margin: 5px 0; /* Відступ між текстом */
-  font-size: 14px; /* Розмір тексту */
-  color: #E1E8ED; /* Колір тексту */
-}
-
-.history-item p strong {
-  color: #1DA1F2; /* Блакитний колір для заголовків */
-}
-
-.history-item a {
-  color: #1DA1F2; /* Блакитний колір для посилань */
-  text-decoration: none; /* Забираємо підкреслення */
-  font-weight: bold; /* Виділяємо жирністю */
-}
-
-.history-item a:hover {
-  text-decoration: underline; /* Підкреслення при наведенні */
-}
-
-.history-divider {
-  border: none;
-  border-top: 1px solid #657786; /* Світлий роздільник */
-  margin: 10px 0; /* Відступи для роздільника */
 }

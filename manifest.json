@@ -2,18 +2,22 @@
   "manifest_version": 3,
   "name": "Emotion Playlist",
   "version": "1.1",
-  "permissions": ["activeTab", "storage", "notifications", "scripting","http://localhost:3000/*","http://*/","https://*/"],
+  "permissions": [
+    "identity",
+    "storage",
+    "activeTab",
+    "notifications",
+    "https://www.googleapis.com/"
+  ],
   "background": {
     "service_worker": "background.js"
   },
-
   "content_scripts": [
     {
       "matches": ["https://x.com/*"],
       "js": ["content.js"]
     }
   ],
-
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -22,7 +26,11 @@
       "128": "icons/X_logo128.png"
     }
   },
-  
+  "oauth2": {
+    "client_id": "301956762580-6kt6t1jjnnim9hq3vjpj3mdibj1jf56u.apps.googleusercontent.com",
+    "scopes": [ "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile"]
+  },
   "icons": {
     "16": "icons/X_logo16.png",
     "48": "icons/X_logo48.png",
